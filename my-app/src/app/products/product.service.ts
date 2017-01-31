@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+
 import { Iproduct } from './product';
 
 
-@Injectable()
+/*@Injectable()
 
 export class ProductService{
     getProduct(): Iproduct[]{
@@ -60,15 +67,33 @@ export class ProductService{
         ]
     }
 }
+*/
 
 
-/*@Injectable()
-
+@Injectable()
 export class ProductService{
-    private _productUrl = 'api/products/products.json';
-    constructor(private _http: Http){} 
+
+   
+    private _productUrl = 'file://home/bsuser1/Desktop/myWorkingDirectory/AngularJs-2/my-app/src/api/products/products.json';
+    
+    constructor(private _http: Http){
+        
+    } 
 
     getProduct(): Observable<Iproduct[]>{
         return this._http.get(this._productUrl)
-        .map((response: Response) => <Iproduct[]> response.json()); 
-    }*/
+        .map((response: Response) => <Iproduct[]> response.json())
+        .do(data => console.log('All: '+ JSON.stringify(data)))
+        .catch(this.handleError);
+        
+    }
+
+    private handleError(error: Response){
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
+
+    ngOnInit(): void{
+     this.getProduct();
+  }
+} 
