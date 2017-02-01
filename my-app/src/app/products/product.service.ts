@@ -72,9 +72,8 @@ export class ProductService{
 
 @Injectable()
 export class ProductService{
-
-   
-    private _productUrl = 'file://home/bsuser1/Desktop/myWorkingDirectory/AngularJs-2/my-app/src/api/products/products.json';
+    
+    private _productUrl = 'api/products/products.json';
     
     constructor(private _http: Http){
         
@@ -83,17 +82,24 @@ export class ProductService{
     getProduct(): Observable<Iproduct[]>{
         return this._http.get(this._productUrl)
         .map((response: Response) => <Iproduct[]> response.json())
-        .do(data => console.log('All: '+ JSON.stringify(data)))
         .catch(this.handleError);
         
     }
 
-    private handleError(error: Response){
+    
+
+getProductDet(id: number): Observable<Iproduct> {
+        return this.getProduct()
+            .map((products: Iproduct[]) => products.find(p => p.productId === id));
+    }
+
+    private handleError(error: Response) {
+        // in a real world app, we may send the server to some remote logging infrastructure
+        // instead of just logging it to the console
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    ngOnInit(): void{
-     this.getProduct();
+   
   }
-} 
+
