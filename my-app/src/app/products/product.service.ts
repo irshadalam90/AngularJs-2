@@ -9,6 +9,41 @@ import 'rxjs/add/operator/map';
 import { Iproduct } from './product';
 
 
+@Injectable()
+export class ProductService{
+    
+    private _productUrl = 'api/products/products.json';
+    
+    constructor(private _http: Http){
+        
+    } 
+
+    getProduct(): Observable<Iproduct[]>{
+        return this._http.get(this._productUrl)
+        .map((response: Response) => <Iproduct[]> response.json())
+        .catch(this.handleError);
+        
+    }
+
+    
+
+getProductDet(id: number): Observable<Iproduct> {
+        return this.getProduct()
+            .map((products: Iproduct[]) => products.find(p => p.productId === id));
+    }
+
+    private handleError(error: Response) {
+        // in a real world app, we may send the server to some remote logging infrastructure
+        // instead of just logging it to the console
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
+
+   
+  }
+
+
+
 /*@Injectable()
 
 export class ProductService{
@@ -68,38 +103,3 @@ export class ProductService{
     }
 }
 */
-
-
-@Injectable()
-export class ProductService{
-    
-    private _productUrl = 'api/products/products.json';
-    
-    constructor(private _http: Http){
-        
-    } 
-
-    getProduct(): Observable<Iproduct[]>{
-        return this._http.get(this._productUrl)
-        .map((response: Response) => <Iproduct[]> response.json())
-        .catch(this.handleError);
-        
-    }
-
-    
-
-getProductDet(id: number): Observable<Iproduct> {
-        return this.getProduct()
-            .map((products: Iproduct[]) => products.find(p => p.productId === id));
-    }
-
-    private handleError(error: Response) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
-
-   
-  }
-
