@@ -1,0 +1,45 @@
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar, Splashscreen } from 'ionic-native';
+//import {  } from '@angular/http';
+
+import { MyTeamsPage } from '../pages/my-teams/my-teams.page';
+import { TournamentsPage } from '../pages/tournaments/tournaments.page';
+import { EliteApi } from './shared/elite-api.service';
+
+
+@Component({
+  templateUrl: 'app.html',
+  providers: [EliteApi]
+})
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
+  rootPage: any = MyTeamsPage;
+
+  
+
+  constructor(public platform: Platform) {
+    this.initializeApp();
+
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
+  }
+
+  goToHome(){
+    this.nav.push(MyTeamsPage);
+    //this.nav.popToRoot();
+    //this.nav.parent.popToRoot();
+  }
+
+  findTournaments(){
+    this.nav.push(TournamentsPage);
+  }
+}
