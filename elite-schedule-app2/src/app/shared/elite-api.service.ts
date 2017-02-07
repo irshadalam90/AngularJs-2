@@ -10,7 +10,7 @@ export class EliteApi{
 
     private baseUrl = 'https://elite-schedule-app-i2-718ce.firebaseio.com'
 
-    crrentTurny: any;
+    currentTourny: any={};
     constructor(private http: Http){
 
     }
@@ -29,10 +29,14 @@ export class EliteApi{
     getTournamentData(tournyId): Observable<any>{
         return this.http.get(`${this.baseUrl}/tournaments-data/${tournyId}.json`)
         .map((response: Response) => {
-        this.crrentTurny = response.json()
+        this.currentTourny = response.json()
+        return this.currentTourny;
         });
+    }
 
-        }
+    getCurrentTourney(){
+        return this.currentTourny;
+    }
 
 
     

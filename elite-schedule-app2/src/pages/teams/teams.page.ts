@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 
 import { TeamHomePage } from '../team-home/team-home.page';
@@ -12,28 +12,38 @@ import { EliteApi } from '../../app/shared/elite-api.service';
 export class TeamsPage{
 
     teams: any[];
-    myError: any;
+    private myError;
     constructor(private nav: NavController,
         private navParams: NavParams,
-        private eliteApi: EliteApi ){
+        private eliteApi: EliteApi,
+        private loadingController: LoadingController ){
 
     }
 
 
-    /*teams = [
-        { id:1, name: 'HC Elite'},
-        { id:2, name: 'Team Takeover'},
-        { id:3, name: 'DC Thunder'}
-    ];*/
-
-
-
 ngOnInit(){
-    let SelectedTourny = this.navParams.data;
-    this.eliteApi.getTournamentData(SelectedTourny.id)
-    .subscribe(data => this.teams = data.teams,
-        error => this.myError = <any> error )
-        console.log(this.teams);
+    let id = this.navParams.data.id;
+    console.log(id);
+    this.getTournamentData(id);
+}
+getTournamentData(id: any){
+    //let SelectedTourny = this.navParams.data;
+    let loader = this.loadingController.create({
+        content: 'Getting teams...'
+        //spinner: 'dots'
+    });
+    loader.present().then(() => {
+        this.eliteApi.getTournamentData(id)
+        .subscribe(data => {
+            this.teams = data.teams;
+            loader.dismiss();
+            },
+                error => {this.myError = <any> error
+            });
+     
+    });
+    
+        
 }
 
 itemTapped($event,team){

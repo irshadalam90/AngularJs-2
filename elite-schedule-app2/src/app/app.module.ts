@@ -8,6 +8,7 @@ import { TeamsPage } from '../pages/teams/teams.page';
 import { TeamsDetailPage } from '../pages/teams-detail/teams-detail.page';
 import { StandingsPage } from '../pages/standings/standings.page'; 
 import { TeamHomePage } from '../pages/team-home/team-home.page';
+import { GamePage } from '../pages/game/game.page';
 import { EliteApi } from './shared/elite-api.service';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EliteApi } from './shared/elite-api.service';
     TeamsPage,
     TeamsDetailPage,
     StandingsPage,
-    TeamHomePage
+    TeamHomePage,
+    GamePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -31,7 +33,8 @@ import { EliteApi } from './shared/elite-api.service';
     TeamsPage,
     TeamsDetailPage,
     StandingsPage,
-    TeamHomePage
+    TeamHomePage,
+    GamePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},EliteApi
   ]
