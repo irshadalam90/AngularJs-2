@@ -5,22 +5,34 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="refreshAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-card>
         <ion-card-content>
             <ion-row>
-                <ion-col>
+                <ion-col width-50>
                     <h2>Records: {{teamStanding.wins}}-{{teamStanding.losses}}</h2>
                     <p>Coach: {{team.coach}}</p>
                 </ion-col>
-                <ion-col>
+                <ion-col width-50 text-right>
+                    <button outline ion-button (click)="toggleFollow()" *ngIf="!isFollowing">
+                        <ion-icon name="star"></ion-icon>
+                        Add Favorite
+                    </button>
 
+                    <button ion-button (click)="toggleFollow()" *ngIf="isFollowing">
+                        <ion-icon name="star"></ion-icon>
+                    </button>
                 </ion-col>
             </ion-row>
                 <ion-item>
                     <ion-label>Date Filter:</ion-label>
+                    <ion-toggle [(ngModel)]="useDateFilter"></ion-toggle>
                     <ion-datetime displayFormat="M/D/YYYY" 
                     pickerFormat="M/D/YYYY"
-                    [(ngModel)]="dateFilter">
+                    [(ngModel)]="dateFilter"
+                    [(disabled)]="!useDateFilter">
                     </ion-datetime>
                 </ion-item>
             
@@ -39,7 +51,7 @@
                 </ion-col>
                 <ion-col width-20>
                     <h4>{{ game.scoreDisplay }}</h4>
-                    
+                    <ion-badge>{{getScoreWorL(game)}}</ion-badge>
                 </ion-col>
             </ion-row>
         </ion-item>

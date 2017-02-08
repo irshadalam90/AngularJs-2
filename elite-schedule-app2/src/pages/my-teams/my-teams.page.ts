@@ -10,6 +10,8 @@ import { EliteApi } from '../../app/shared/elite-api.service';
 })
 export class MyTeamsPage{
 
+    team: any;
+
     favourates = [
         {
             team: {id: '6149', name: 'Cyclones  3rd', coach: 'Glenn Nelson'},
@@ -38,6 +40,6 @@ export class MyTeamsPage{
         });
         loader.present();
         this.eliteApi.getTournamentData(favourite.tournamentId)
-        .subscribe(t => this.nav.push(TeamHomePage, favourite));
+        .subscribe(t => this.nav.push(TeamHomePage, favourite.team));
     }
 }

@@ -11,6 +11,7 @@ export class EliteApi{
     private baseUrl = 'https://elite-schedule-app-i2-718ce.firebaseio.com'
 
     currentTourny: any={};
+    private tourneyData = {};
     constructor(private http: Http){
 
     }
@@ -33,6 +34,25 @@ export class EliteApi{
         return this.currentTourny;
         });
     }
+
+    /*getTournamentData(tournyId, forceRefresh: boolean = false): Observable<any>{
+        if(!forceRefresh && this.tourneyData[tournyId]){
+            this.currentTourny = this.tourneyData[tournyId];
+            console.log("** no need to make http call, just return the data");
+            return Observable.of(this.currentTourny);
+        }
+
+        return this.http.get(`${this.baseUrl}/tournaments-data/${tournyId}.json`)
+        .map((response: Response) => {
+            this.tourneyData[tournyId]=response.json();
+            this.currentTourny = this.tourneyData[tournyId];
+            return this.currentTourny;
+        });
+    }*/
+
+    /*refreshCurrentTourney(){
+        return this.getTournamentData(this.currentTourny.tournament.id,true);
+    }*/
 
     getCurrentTourney(){
         return this.currentTourny;

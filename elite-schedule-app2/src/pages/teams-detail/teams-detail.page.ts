@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import * as _ from 'lodash';
+//import * as _ from 'moment';
 
 import { EliteApi } from '../../app/shared/elite-api.service';
 import { MyTeamsPage } from '../my-teams/my-teams.page';
@@ -12,15 +13,20 @@ import { GamePage } from '../game/game.page';
 })
 export class TeamsDetailPage{
 
+    allGames: any[];
     team: any;
     dateFilter: string;
     private games: any;
     private tournyData: any;
     teamStanding: any;
+    useDateFilter = false;
+    isFollowing = false;
 
     constructor(private nav:NavController,
      private navParams: NavParams,
-     private eliteApi: EliteApi){}
+     private eliteApi: EliteApi,
+     private alert: AlertController,
+     private toastController: ToastController){}
 
     ngOnInit(){
         this.team = this.navParams.data;
@@ -30,7 +36,7 @@ export class TeamsDetailPage{
                       .map(g => {
                           let isTeam1 = (g.team1Id == this.team.id);
                           let opponentName = isTeam1 ? g.team2 : g.team1;
-                          let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2.score);
+                          let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
                           return{
                               gameId: g.id,
                               opponent: opponentName,
@@ -43,14 +49,15 @@ export class TeamsDetailPage{
                       }) 
                       .value();
 
+        this.allGames = this.games;
         this.teamStanding = _.find(this.tournyData.standings, { 'teamId': this.team.id });
     }
 
     getScoreDisplay(isTeam1, team1Score, team2Score){
         if(team1Score && team2Score){
-            var teamScore = (isTeam1 ? teamScore : team1Score);
-            var opponentScore = (isTeam1 ? teamScore : team1Score);
-            var winIndicator = teamScore > opponentScore ? 'w: ': 'L: ';
+            var teamScore = (isTeam1 ? team1Score : team2Score);
+            var opponentScore = (isTeam1 ? team2Score : team1Score);
+            var winIndicator = teamScore > opponentScore ? 'W: ': 'L: ';
             return winIndicator + teamScore + "-" + opponentScore ; 
         }
         else{
@@ -68,4 +75,53 @@ gameClicked($event, game){
     let sourceGame = this.tournyData.games.find(g => g.id === game.gameId);
     this.nav.parent.parent.push(GamePage, sourceGame);
 }
+
+getScoreWorL(game){
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
+}
+
+/*getScoreDisplayBadgeClass(game){
+    game.scoreDisplay.indexOf('w:') === 0 ? 'badge-primary' : 'badge-danger';
+}*/
+
+/*dateChanged(){
+    this.games = _.filter(this.allGames, g => moment(g.time).)
+}*/
+
+    toggleFollow(){
+        if(this.isFollowing){
+            let confirm = this.alert.create({
+                title: "Unfollow",
+                message: "Are you sure you want to Unfollow?",
+                buttons: [
+                    {
+                        text: "Yes",
+                        handler: () => {
+                            this.isFollowing = false;
+                            //TODO persist data
+                            let toast = this.toastController.create({
+                                message: 'You have unfollowed this team',
+                                duration: 2000,
+                                position: 'bottom'
+                            });
+                            toast.present();
+                        }
+                    },
+                    {text: 'No'}
+                ]
+            });
+            confirm.present();
+        }
+        else{
+            this.isFollowing = true;
+            //TODO persist data
+        }
+    }
+    /*refreshAll(refresher){
+        this.eliteApi.refreshCurrentTourney()
+        .subscribe(() => {
+            refresher.complete();
+            this.ngOnInit();
+        });
+    }*/
 }
