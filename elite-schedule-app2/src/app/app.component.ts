@@ -1,16 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-//import {  } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { MyTeamsPage } from '../pages/my-teams/my-teams.page';
 import { TournamentsPage } from '../pages/tournaments/tournaments.page';
 import { EliteApi } from './shared/elite-api.service';
+//import { UserSettings } from './shared/user-settings.service'
 
 
 @Component({
   templateUrl: 'app.html',
-  providers: [EliteApi]
+  providers: [HttpModule,EliteApi]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

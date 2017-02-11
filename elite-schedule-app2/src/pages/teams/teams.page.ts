@@ -28,7 +28,7 @@ export class TeamsPage{
 
 ngOnInit(){
     let id = this.navParams.data.id;
-    console.log(id);
+    //console.log(id);
     this.getTournamentData(id);
 }
 getTournamentData(id: any){

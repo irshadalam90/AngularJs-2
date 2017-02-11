@@ -4,6 +4,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { StandingsPage } from '../standings/standings.page';
 import { TeamsDetailPage } from '../teams-detail/teams-detail.page';
 import { MyTeamsPage } from '../my-teams/my-teams.page';
+//import { UserSettings } from '../../app/shared/user-settings.service';
+
 
 @Component({
     templateUrl: 'team-home.page.html'
