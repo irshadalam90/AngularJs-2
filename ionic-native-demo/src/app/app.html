@@ -1,0 +1,24 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Ionic Native Component</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-list-header>Navigate</ion-list-header>
+      <button menuClose ion-item (click)="goToHome()">Home</button>
+      <button menuClose ion-item (click)="vibration()">vibration</button>
+      <button menuClose ion-item (click)="goToCamera()">Camera</button>
+      <button menuClose ion-item (click)="goToBarcode()">Bar Code Scanner</button>
+      <button menuClose ion-item (click)="goToDeviceMotion()">Device Motion</button>
+      <button menuClose ion-item (click)="goToCall()">Call</button>
+      <button menuClose ion-item (click)="goToSms()">SMS</button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

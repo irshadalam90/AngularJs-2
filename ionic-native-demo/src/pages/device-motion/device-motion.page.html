@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Device motion
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button full (click)="startWatching()">Start Watching</button>
+  <button ion-button full (click)="stopWatching()">Stop Watching</button>
+
+  <ion-card *ngIf="data">
+      <h2>{{data.x | number: '1.4-4'}}</h2>
+      <h2>{{data.y | number: '1.4-4'}}</h2>
+      <h2>{{data.z | number: '1.4-4'}}</h2>
+  </ion-card>
+</ion-content>
