@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end (click)="close()">
+      <ion-icon name="md-close" class="close-btn"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center>
+      Reset Password
+    </ion-title>
+    </ion-navbar>
+  </ion-header>
+            
+  <ion-content padding class="item-set">
+    <ion-list *ngIf="showResetPassword == 1">
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="forgotPassword.email"></ion-input>
+      </ion-item>
+      <button ion-button full color="secondary" (click)="resetPasswordInstructions()">Reset</button>
+    </ion-list>
+
+    <ion-list *ngIf="showResetPassword == 2" >
+      <ion-item>
+        <ion-label>Code</ion-label>
+        <ion-input type="text" [(ngModel)]="forgotPassword.code"></ion-input>
+      </ion-item>
+      <button ion-button full color="secondary" (click)="codeConfirm()">Verify Code</button>
+    </ion-list>
+
+    <ion-list *ngIf="showResetPassword == 3" >
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="forgotPassword.password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Re-enter Password</ion-label>
+        <ion-input type="password" [(ngModel)]="forgotPassword.forgotPassword"></ion-input>
+      </ion-item>
+      <button ion-button full color="secondary" (click)="resetPassword()">Reset Password</button>
+    </ion-list>
+   
+</ion-content>

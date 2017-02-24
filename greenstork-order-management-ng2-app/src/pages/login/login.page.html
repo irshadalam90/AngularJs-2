@@ -1,0 +1,46 @@
+<ion-content class="login-page" padding>
+    <div class="text-content-top">
+        <h1>GreenStork</h1>
+        <p>Mobile Order Management</p>
+    </div>
+
+    
+        <ion-list no-lines>
+            <form [formGroup]="userForm">
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" formControlName="email" id="email"></ion-input>
+                </ion-item>
+                
+
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" formControlName="password" id="password"></ion-input>
+                </ion-item>
+                
+                <a (click)="openModal()" class="pull-right f-password">Forgot Password</a>
+                <button ion-button style="background: #00D9A1" full (click)="login()">Login</button>
+           </form>
+        </ion-list>
+        <!--<ion-list no-lines>
+            
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" [(ngModel)]="userLoginInfo.email" id="email"></ion-input>
+                </ion-item>
+                
+
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="userLoginInfo.password" id="password"></ion-input>
+                </ion-item>
+                
+                <a (click)="openModal()" class="pull-right f-password">Forgot Password</a>
+                <button ion-button style="background: #00D9A1" full (click)="login()">Login</button>
+           
+        </ion-list>-->
+   
+
+
+</ion-content>
+

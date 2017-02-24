@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-navbar>
+         <ion-title>Order Details</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <h2>Order #{{order.id}}</h2>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row>
+                <ion-col width-40>Time & date</ion-col>
+                <ion-col width-60>{{attributes.time}} {{attributes.date}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Order Type:</ion-col>
+                <ion-col width-60>{{attributes.type}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Medical or Rec:</ion-col>
+                <ion-col width-60>{{attributes.medical}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>When</ion-col>
+                <ion-col width-60>{{attributes.delivery_time}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Status</ion-col>
+                <ion-col width-60></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Name</ion-col>
+                <ion-col width-60>{{attributes.name}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Address</ion-col>
+                <ion-col width-60>{{attributes.address}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Unit/Suit</ion-col>
+                <ion-col width-60>{{attributes.unit}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Phone</ion-col>
+                <ion-col width-60>{{attributes.phone_no}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Email</ion-col>
+                <ion-col width-60>{{attributes.email}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Valid Id</ion-col>
+                <ion-col width-60><ion-img src="{{attributes.view_id}}" height="100px" width="120px"></ion-img></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>View Doctor's Rec:</ion-col>
+                <ion-col width-60><ion-img src="{{attributes.doc_id}}" height="100px" width="120px"></ion-img></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col><h4>Order Details</h4></ion-col>
+            </ion-row>
+            <div *ngFor="let item of items">
+            <ion-row>
+                <ion-col width-40>{{item.quantity}}x{{item.unit_name}} {{item.name}}</ion-col>
+                <ion-col width-60>{{item.total_price}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Subtotal</ion-col>
+                <ion-col width-60>{{attributes.total}}</ion-col>
+            </ion-row>
+            </div>
+            <ion-row>
+                <ion-col width-40>Delivery Fee</ion-col>
+                <ion-col width-60>{{attributes.delivery_fee}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Tax</ion-col>
+                <ion-col width-60>{{attributes.sales_tax}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Total</ion-col>
+                <ion-col width-60>{{attributes.total_amount}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col width-40>Payment Method</ion-col>
+                <ion-col width-60>{{attributes.payment_method}}</ion-col>
+            </ion-row>
+            
+            <ion-row>
+                <ion-col width-40>Delivery Notes</ion-col>
+                <ion-col width-60>{{attributes.delivery_notes}}</ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

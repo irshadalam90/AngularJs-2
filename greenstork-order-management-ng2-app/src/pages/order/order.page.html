@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <button ion-button style="background: #00D9A1">Logout</button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Store</ion-label>
+            <ion-select [(ngModel)]="selectedstore" (ngModelChange)="change()">
+                <ion-option *ngFor="let store of stores" [value]="store.name">{{store.name}}</ion-option>
+                
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Order Date</ion-label>
+            <ion-select [(ngModel)]="selectedODate" (ngModelChange)="change()">
+                <ion-option *ngFor="let oDate of order_date" [value]="oDate">{{oDate}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Filter By Status</ion-label>
+            <ion-select [(ngModel)]="selectedstatus" (ngModelChange)="change()">
+                <ion-option *ngFor="let status of statuses" [value]="status">{{status}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Type</ion-label>
+            <ion-select [(ngModel)]="selectedtype" (ngModelChange)="change()">
+                <ion-option *ngFor="let t of type" [value]="t">{{t}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <ion-card *ngFor="let order of orders" (click)="orderDetail($event,order)">
+        <ion-card-header>
+            <ion-row>
+                <ion-col>Order #{{order.id}}</ion-col>
+                <ion-col>{{order.attributes.time}}</ion-col>
+                <ion-col>{{order.attributes.date}}</ion-col>
+            </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row>
+                <ion-col>{{order.attributes.dispensary}}</ion-col>
+                <ion-col>${{order.attributes.total}}</ion-col>
+                <ion-col><ion-badge style="background: #ffc900">{{order.attributes.status | uppercase}}</ion-badge></ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    
+  
+</ion-content>
+
