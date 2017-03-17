@@ -12,23 +12,26 @@ import { EliteApi } from '../../app/shared/elite-api.service';
 })
 export class TeamsPage{
 
+    
     private allTeams: any;
     private allTeamDivisions: any;
     teams: any[];
     private myError;
     queryText: string;
+    
 
     constructor(private nav: NavController,
         private navParams: NavParams,
         private eliteApi: EliteApi,
         private loadingController: LoadingController ){
-
+             //for (let i = 0; i < 30; i++) {
+      //this.teams.push( this.teams.length );
+   // }
     }
 
 
 ngOnInit(){
     let id = this.navParams.data.id;
-    //console.log(id);
     this.getTournamentData(id);
 }
 getTournamentData(id: any){
@@ -48,6 +51,7 @@ getTournamentData(id: any){
                  .map(item => _.zipObject(['divisionName','divisionTeams'],item))
                  .value();
                  this.teams = this.allTeamDivisions;
+                
                  console.log(this.teams);
                  loader.dismiss();
             },
@@ -75,5 +79,18 @@ updateTeams(){
     });
     this.teams = filteredTeams;
 }
+
+/*doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      for (let i = 0; i < 30; i++) {
+        this.teams.push( this.teams.length );
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }*/
 
 }

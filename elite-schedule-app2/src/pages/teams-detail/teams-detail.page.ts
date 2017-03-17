@@ -14,6 +14,7 @@ import { GamePage } from '../game/game.page';
 })
 export class TeamsDetailPage{
 
+    
     allGames: any[];
     team: any;
     dateFilter: string;
@@ -27,7 +28,9 @@ export class TeamsDetailPage{
      private navParams: NavParams,
      private eliteApi: EliteApi,
      private alert: AlertController,
-     private toastController: ToastController){}
+     private toastController: ToastController){
+         
+     }
 
     ngOnInit(){
         this.team = this.navParams.data;
@@ -127,11 +130,13 @@ getScoreWorL(game){
             );*/
         }
     }
-    /*refreshAll(refresher){
+    refreshAll(refresher){
         this.eliteApi.refreshCurrentTourney()
         .subscribe(() => {
             refresher.complete();
             this.ngOnInit();
         });
-    }*/
+    }
+
+     
 }
